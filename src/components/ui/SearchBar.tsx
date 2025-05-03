@@ -27,14 +27,14 @@ const SearchBar = () => {
 
   return (
     <>
-      <div className="flex items-center gap-2 w-full">
+      <div className="flex items-center gap-2">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Enter city name"
-          className="px-4 py-2 border text-black dark:text-white border-gray-600 rounded-md w-64 focus:outline-none"
+          className="px-4 py-2 border text-black dark:text-white border-gray-600 rounded-md w-full focus:outline-none"
         />
         <button
           onClick={handleSearch}
