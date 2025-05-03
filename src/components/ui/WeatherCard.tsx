@@ -52,8 +52,8 @@ const WeatherCard = () => {
   }&layer=mapnik&marker=${coord.lat},${coord.lon}`;
 
   return (
-    <div className=" mx-auto flex flex-col">
-      <div className=" mb-4  bg-[#bccfe1] dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm  rounded-2xl min-h-[100px] p-4">
+    <div className=" mx-auto flex flex-col gap-2">
+      <div className=" mb-4  dark:border dark:border-gray-600  bg-[#bccfe1] dark:bg-gray-800 dark:shadow-sm  rounded-2xl min-h-[135px] p-6 space-y-2">
         <p>Current Local Time</p>
         <strong>{time.toLocaleTimeString()}</strong>
         <h2 className="text-3xl font-bold">
@@ -65,43 +65,46 @@ const WeatherCard = () => {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between gap-4 ">
-        <div className="bg-[#bccfe1] dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl flex flex-col  w-full gap-2 p-4 ">
+      <div className="flex dark:border dark:border-gray-600 rounded-xl flex-col md:flex-row justify-between gap-4">
+        <div className="bg-[#bccfe1] dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl flex flex-col w-full gap-2 p-6 min-h-[220px]">
           {loading ? (
-            <div className="flex justify-center items-center min-h-[200px]">
+            <div className="flex justify-center items-center h-full">
               <CircleLoader color="#3b82f6" height={6} width={3} />
             </div>
           ) : (
-            <>
-              <img
-                src={iconUrl}
-                alt={weather[0].description}
-                className="w-24 h-24"
-              />
-              <p className="text-4xl font-bold">{main.temp}°C</p>
+            <div className="flex justify-center sm:justify-between flex-wrap gap-4">
               <div>
-                <p className="text-sm capitalize">{weather[0].description}</p>
-                <p className="text-sm text-gray-500">
-                  Feels like: {main.feels_like}°C
-                </p>
+                <img
+                  src={iconUrl}
+                  alt={weather[0].description}
+                  className="w-24 h-24"
+                />
+                <p className="text-4xl font-bold">{main.temp}°C</p>
+                <div>
+                  <p className="text-sm capitalize">{weather[0].description}</p>
+                  <p className="text-sm text-gray-500">
+                    Feels like: {main.feels_like}°C
+                  </p>
+                </div>
               </div>
-            </>
+
+              <div className="overflow-hidden rounded-xl">
+                <iframe
+                  src={mapUrl}
+                  width="100%"
+                  className="h-full"
+                  style={{ border: 0, borderRadius: "12px" }}
+                  allowFullScreen
+                  loading="lazy"
+                  title="City Location"
+                ></iframe>
+              </div>
+            </div>
           )}
-        </div>
-        <div className="border overflow-hidden rounded-xl">
-          <iframe
-            src={mapUrl}
-            width="100%"
-            height="240"
-            style={{ border: 0, borderRadius: "20px" }}
-            allowFullScreen
-            loading="lazy"
-            title="City Location"
-          ></iframe>
         </div>
       </div>
 
-      <div className="my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
+      <div className="my-4 dark:border dark:border-gray-600 grid grid-cols-1 grid-cols-2 md:grid-cols-3 gap-4 w-full">
         <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-4">
           <span className="flex items-start gap-2">
             <Droplet size={14} className="mt-2" />
@@ -169,7 +172,7 @@ const WeatherCard = () => {
           </span>
         </p>
       </div>
-      <div className="flex justify-between items-start min-h-[200px] w-full bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-6">
+      <div className="dark:border dark:border-gray-600 flex justify-between items-start min-h-[200px] w-full bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:shadow-sm rounded-xl p-6">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col items-start gap-1">
             <Thermometer size={32} />

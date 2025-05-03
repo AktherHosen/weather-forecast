@@ -34,11 +34,11 @@ const SearchBar = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Enter city name"
-          className="px-4 py-2 border rounded-md w-64 focus:outline-none"
+          className="px-4 py-2 border text-black dark:text-white border-gray-600 rounded-md w-64 focus:outline-none"
         />
         <button
           onClick={handleSearch}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-black text-white px-4 py-2 rounded "
         >
           Search
         </button>
