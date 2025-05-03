@@ -41,33 +41,40 @@ const SearchHistory = () => {
   };
 
   return (
-    <div className="bg-[#bccfe1] dark:text-white dark:bg-gray-800  dark:border dark:border-gray-600 dark:shadow-sm rounded-xl px-4 py-4 min-h-[135px]">
+    <div className="bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border dark:border-gray-600 dark:shadow-sm rounded-xl px-4 py-4 min-h-[100px]">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-medium">Search History</h3>
         {searchHistory.length > 0 && (
-          <button onClick={handleClear} className=" text-blue-500">
+          <button onClick={handleClear} className="text-blue-500">
             Clear All
           </button>
         )}
       </div>
-      <ul className="space-y-2 mt-4">
-        {searchHistory.map((city, index) => (
-          <li key={index} className="flex items-center justify-between">
-            <span
-              onClick={() => dispatch(getWeather(city))}
-              className="cursor-pointer hover:text-blue-600 text-sm"
-            >
-              {city}
-            </span>
-            <span
-              onClick={() => handleRemoveCity(city)}
-              className="text-red-500 cursor-pointer"
-            >
-              <X size={14} />
-            </span>
-          </li>
-        ))}
-      </ul>
+
+      {searchHistory.length > 0 ? (
+        <ul className="space-y-2 mt-4">
+          {searchHistory.map((city, index) => (
+            <li key={index} className="flex items-center justify-between">
+              <span
+                onClick={() => dispatch(getWeather(city))}
+                className="cursor-pointer hover:text-blue-600 text-sm"
+              >
+                {city}
+              </span>
+              <span
+                onClick={() => handleRemoveCity(city)}
+                className="text-red-500 cursor-pointer"
+              >
+                <X size={14} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
+          No recent searches found.
+        </p>
+      )}
     </div>
   );
 };
