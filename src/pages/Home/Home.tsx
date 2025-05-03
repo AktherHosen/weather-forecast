@@ -1,6 +1,5 @@
-import WeatherCard from "../../components/ui/SearchBar";
-import SearchBar from "../../components/ui/WeatherCard";
-
+import SearchBar from "../../components/ui/SearchBar";
+import WeatherCard from "../../components/ui/WeatherCard";
 const Home = () => {
   return (
     <div>
