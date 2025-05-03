@@ -30,7 +30,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="w-full flex justify-center lg:w-auto lg:justify-end">
+        <div className="w-full flex justify-center lg:justify-end">
           <SearchBar />
         </div>
       </nav>
