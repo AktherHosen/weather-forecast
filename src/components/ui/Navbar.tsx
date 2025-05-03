@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className="mt-4">
       <nav className="flex items-center justify-between flex-wrap gap-4 mb-6 py-4 px-4 bg-[#bccfe1] rounded-md dark:bg-gray-800 dark:text-white">
-        <h2 className="text-xl font-semibold ">Weather Forecast</h2>
+        <h2 className="text-xl font-semibold title-font">Weather Forecast</h2>
 
         <SearchBar />
         <button onClick={toggleTheme} className="px-3 py-1 text-sm rounded">

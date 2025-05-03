@@ -41,7 +41,7 @@ const SearchHistory = () => {
   };
 
   return (
-    <div className="bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl px-4 py-2">
+    <div className="bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl px-4 py-4 min-h-[135px]">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-medium">Search History</h3>
         {searchHistory.length > 0 && (

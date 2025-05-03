@@ -1,21 +1,21 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchWeather } from '../../utils/api';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { fetchWeather } from "../../utils/api";
 
 export const getWeather = createAsyncThunk(
-  'weather/getWeather',
+  "weather/getWeather",
   async (city: string) => {
     return await fetchWeather(city);
   }
 );
 
 const weatherSlice = createSlice({
-  name: 'weather',
+  name: "weather",
   initialState: {
-    city: '',
+    city: "",
     data: null,
     loading: false,
-    error: '',
-    history: [] as string[], // Store search history in Redux
+    error: "",
+    history: [] as string[],
   },
   reducers: {
     setCity(state, action) {
@@ -24,24 +24,24 @@ const weatherSlice = createSlice({
     addSearchHistory(state, action) {
       const newCity = action.payload;
       if (!state.history.includes(newCity)) {
-        state.history.unshift(newCity); // Add at the start of the history list
+        state.history.unshift(newCity);
       }
       if (state.history.length > 5) {
-        state.history.pop(); // Limit history size to 5 items (optional)
+        state.history.pop();
       }
     },
     removeSearchHistory(state, action) {
-      state.history = state.history.filter(city => city !== action.payload);
+      state.history = state.history.filter((city) => city !== action.payload);
     },
     clearHistory(state) {
       state.history = [];
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(getWeather.pending, state => {
+      .addCase(getWeather.pending, (state) => {
         state.loading = true;
-        state.error = '';
+        state.error = "";
       })
       .addCase(getWeather.fulfilled, (state, action) => {
         state.loading = false;
@@ -49,10 +49,11 @@ const weatherSlice = createSlice({
       })
       .addCase(getWeather.rejected, (state) => {
         state.loading = false;
-        state.error = 'City not found or API error.';
+        state.error = "City not found";
       });
   },
 });
 
-export const { setCity, addSearchHistory, removeSearchHistory, clearHistory } = weatherSlice.actions;
+export const { setCity, addSearchHistory, removeSearchHistory, clearHistory } =
+  weatherSlice.actions;
 export default weatherSlice.reducer;

@@ -5,10 +5,11 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/Store.tsx";
 
-
+import { ToastContainer, toast } from "react-toastify";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
+      <ToastContainer position="bottom-right"></ToastContainer>
       <App />
     </Provider>
   </StrictMode>

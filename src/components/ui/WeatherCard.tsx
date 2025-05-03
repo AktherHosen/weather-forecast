@@ -7,9 +7,12 @@ import {
   Eye,
   Sun,
   Sunset,
+  Thermometer,
   ThermometerSun,
   Wind,
 } from "lucide-react";
+import { CircleLoader, FadeLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const WeatherCard = () => {
   const [time, setTime] = useState(new Date());
@@ -25,9 +28,12 @@ const WeatherCard = () => {
     (state: RootState) => state.weather
   );
 
-  if (loading) return <div className="text-center mt-6">Loading...</div>;
-  if (error)
-    return <div className="text-center text-red-500 mt-6">{error}</div>;
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   if (!data) return null;
 
   const { name, sys, weather, main, wind, clouds, visibility, coord } = data;
@@ -60,19 +66,27 @@ const WeatherCard = () => {
       </div>
 
       <div className="flex flex-col md:flex-row justify-between gap-4 ">
-        <div className=" bg-[#bccfe1] dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl flex flex-col items-start w-full text-start gap-4 p-4">
-          <img
-            src={iconUrl}
-            alt={weather[0].description}
-            className="w-24 h-24 "
-          />
-          <p className="text-4xl font-bold">{main.temp}°C</p>
-          <div>
-            <p className="text-sm capitalize">{weather[0].description}</p>
-            <p className="text-sm text-gray-500">
-              Feels like: {main.feels_like}°C
-            </p>
-          </div>
+        <div className="bg-[#bccfe1] dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl flex flex-col  w-full gap-2 p-4 ">
+          {loading ? (
+            <div className="flex justify-center items-center min-h-[200px]">
+              <CircleLoader color="#3b82f6" height={6} width={3} />
+            </div>
+          ) : (
+            <>
+              <img
+                src={iconUrl}
+                alt={weather[0].description}
+                className="w-24 h-24"
+              />
+              <p className="text-4xl font-bold">{main.temp}°C</p>
+              <div>
+                <p className="text-sm capitalize">{weather[0].description}</p>
+                <p className="text-sm text-gray-500">
+                  Feels like: {main.feels_like}°C
+                </p>
+              </div>
+            </>
+          )}
         </div>
         <div className="border overflow-hidden rounded-xl">
           <iframe
@@ -88,61 +102,107 @@ const WeatherCard = () => {
       </div>
 
       <div className="my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full">
-        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-2">
-          <span className="flex items-center gap-1 mb-1">
-            <Droplet size={14} />
+        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-4">
+          <span className="flex items-start gap-2">
+            <Droplet size={14} className="mt-2" />
+            <div>
+              <span className="font-bold block text-black dark:text-white">
+                Humidity
+              </span>
+              {main.humidity}%
+            </div>
+          </span>
+        </p>
+        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-4">
+          <span className="flex items-start gap-2">
+            <Wind size={14} className="mt-2" />
+            <div>
+              <span className="font-bold block text-black dark:text-white">
+                Cloudiness
+              </span>
+              {wind.speed} m/s, {wind.deg}°
+            </div>
+          </span>
+        </p>
+        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-4">
+          <span className="flex items-start gap-2">
+            <Cloud size={14} className="mt-2" />
+            <div>
+              <span className="font-bold block text-black dark:text-white">
+                Cloudiness
+              </span>
+              {clouds.all}%
+            </div>
+          </span>
+        </p>
+        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-4">
+          <span className="flex items-start gap-2">
+            <Cloud size={14} className="mt-2" />
+            <div>
+              <span className="font-bold block text-black dark:text-white">
+                Pressure
+              </span>
+              {main.pressure}%
+            </div>
+          </span>
+        </p>
+        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-4">
+          <span className="flex items-start gap-2">
+            <Eye size={14} className="mt-2" />
+            <div>
+              <span className="font-bold block text-black dark:text-white">
+                Visibility
+              </span>
+              {visibility / 1000} km
+            </div>
+          </span>
+        </p>
+        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-4">
+          <span className="flex items-start gap-2">
+            <Eye size={14} className="mt-2" />
+            <div>
+              <span className="font-bold block text-black dark:text-white">
+                Air Quality
+              </span>
+              {clouds.all}
+            </div>
+          </span>
+        </p>
+      </div>
+      <div className="flex justify-between items-start min-h-[200px] w-full bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-6">
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-col items-start gap-1">
+            <Thermometer size={32} />
             <span className="font-bold text-black dark:text-white">
-              Humidity
+              Min Temp
             </span>
-          </span>
-          {main.humidity}%
-        </p>
+            <span className="text-sm">{main.temp_min}</span>
+          </div>
 
-        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-2">
-          <span className="flex items-center gap-1 mb-1">
-            <Wind size={14} />
-            <span className="font-bold text-black dark:text-white">Wind</span>
-          </span>
-          {wind.speed} m/s, {wind.deg}°
-        </p>
-
-        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-2">
-          <span className="flex items-center gap-1 mb-1">
-            <Cloud size={14} />
+          <div className="flex flex-col items-start gap-1">
+            <Thermometer size={32} />
             <span className="font-bold text-black dark:text-white">
-              Cloudiness
+              Max Temp
             </span>
-          </span>
-          {clouds.all}%
-        </p>
+            <span className="text-sm">{main.temp_max}</span>
+          </div>
+        </div>
 
-        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-2">
-          <span className="flex items-center gap-1 mb-1">
-            <Eye size={14} />
-            <span className="font-bold text-black dark:text-white">
-              Visibility
-            </span>
-          </span>
-          {visibility / 1000} km
-        </p>
-
-        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-2">
-          <span className="flex items-center gap-1 mb-1">
-            <Sun size={14} />
+        <div className="flex flex-col gap-8 items-end">
+          <div className="flex flex-col items-end gap-1">
+            <Sun size={32} />
             <span className="font-bold text-black dark:text-white">
               Sunrise
             </span>
-          </span>
-          {formatTime(sys.sunrise)}
-        </p>
+            <span className="text-sm">{formatTime(sys.sunrise)}</span>
+          </div>
 
-        <p className="h-full flex flex-col justify-between bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border-gray-200 dark:shadow-sm rounded-xl p-2">
-          <span className="flex items-center gap-1 mb-1">
-            <Sun size={14} />
+          <div className="flex flex-col items-end gap-1">
+            <Sun size={32} />
             <span className="font-bold text-black dark:text-white">Sunset</span>
-          </span>
-          {formatTime(sys.sunset)}
-        </p>
+            <span className="text-sm">{formatTime(sys.sunset)}</span>
+          </div>
+        </div>
       </div>
     </div>
   );
