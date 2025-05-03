@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getWeather } from "../../redux/features/weatherSlice";
 import { AppDispatch } from "../../redux/Store";
