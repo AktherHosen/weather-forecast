@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/Store";
 import { useEffect, useState } from "react";
 import {
   Cloud,
@@ -23,9 +22,7 @@ const WeatherCard = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const { data, loading, error } = useSelector(
-    (state: RootState) => state.weather
-  );
+  const { data, loading, error } = useSelector((state: any) => state.weather);
 
   useEffect(() => {
     if (error) {

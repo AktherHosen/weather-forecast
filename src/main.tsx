@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <ToastContainer position="bottom-right"></ToastContainer>
+      <ToastContainer position="bottom-right" className="p-3"></ToastContainer>
       <App />
     </Provider>
   </StrictMode>

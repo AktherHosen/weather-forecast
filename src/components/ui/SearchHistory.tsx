@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getWeather } from "../../redux/features/weatherSlice";
-import { AppDispatch } from "../../redux/Store";
 import { X } from "lucide-react";
 
 const SearchHistory = () => {
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const saved = localStorage.getItem("weather-history");
@@ -40,6 +39,10 @@ const SearchHistory = () => {
     localStorage.removeItem("weather-history");
   };
 
+  const handleSearchCity = (city: string) => {
+    dispatch(getWeather(city) as any);
+  };
+
   return (
     <div className="bg-[#bccfe1] dark:text-white dark:bg-gray-800 dark:border dark:border-gray-600 dark:shadow-sm rounded-xl px-4 py-4 min-h-[100px]">
       <div className="flex justify-between items-center">
@@ -56,7 +59,7 @@ const SearchHistory = () => {
           {searchHistory.map((city, index) => (
             <li key={index} className="flex items-center justify-between">
               <span
-                onClick={() => dispatch(getWeather(city))}
+                onClick={() => handleSearchCity(city)} // Clicked city will trigger the correct weather data fetch
                 className="cursor-pointer hover:text-blue-600 text-sm"
               >
                 {city}

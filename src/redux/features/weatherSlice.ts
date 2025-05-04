@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { fetchWeather } from "../../utils/api";
 
-// Define types for the weather data
 interface WeatherData {
   name: string;
   sys: { country: string; sunrise: number; sunset: number };
@@ -20,7 +19,6 @@ interface WeatherData {
   coord: { lat: number; lon: number };
 }
 
-// Define the initial state type
 interface WeatherState {
   city: string;
   data: WeatherData | null;
@@ -29,11 +27,14 @@ interface WeatherState {
   history: string[];
 }
 
-// Create the async thunk to fetch weather data
 export const getWeather = createAsyncThunk<WeatherData, string>(
   "weather/getWeather",
-  async (city: string) => {
-    return await fetchWeather(city);
+  async (city: string, { rejectWithValue }) => {
+    try {
+      return await fetchWeather(city);
+    } catch (error) {
+      return rejectWithValue("City not found");
+    }
   }
 );
 
@@ -45,7 +46,7 @@ const weatherSlice = createSlice({
     loading: false,
     error: "",
     history: [] as string[],
-  } as WeatherState, // Adding type to initialState
+  } as WeatherState,
   reducers: {
     setCity(state, action: PayloadAction<string>) {
       state.city = action.payload;
@@ -71,6 +72,7 @@ const weatherSlice = createSlice({
       .addCase(getWeather.pending, (state) => {
         state.loading = true;
         state.error = "";
+        state.data = null;
       })
       .addCase(
         getWeather.fulfilled,
@@ -79,9 +81,9 @@ const weatherSlice = createSlice({
           state.data = action.payload;
         }
       )
-      .addCase(getWeather.rejected, (state) => {
+      .addCase(getWeather.rejected, (state, action) => {
         state.loading = false;
-        state.error = "City not found";
+        state.error = action.payload as string;
       });
   },
 });
