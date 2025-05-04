@@ -6,13 +6,10 @@ A sleek, responsive weather forecast application built using **React**, **TypeSc
 
 - Light/dark mode toggle
 - Live previews
-- Fullscreen mode
-- Cross platform
 - Real-time current weather by city
 - Latitude and longitude with map preview
 - Weather conditions with icon
 - Wind speed, humidity, pressure
-- 5-day forecast support (optional API)
 - Dark/Light mode toggle
 - Search history with management
 - Built with modern React & TypeScript
