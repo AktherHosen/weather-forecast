@@ -1,54 +1,57 @@
-# React + TypeScript + Vite
+# 🌤️ Weather Forecast
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek, responsive weather forecast application built using **React**, **TypeScript**, **Tailwind CSS v4**, and **Redux Toolkit**. It fetches real-time weather data from the **OpenWeatherMap API**, supports **dark/light theme toggle**, shows current weather, and includes search history and location mapping.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Light/dark mode toggle
+- Live previews
+- Fullscreen mode
+- Cross platform
+- Real-time current weather by city
+- Latitude and longitude with map preview
+- Weather conditions with icon
+- Wind speed, humidity, pressure
+- 5-day forecast support (optional API)
+- Dark/Light mode toggle
+- Search history with management
+- Built with modern React & TypeScript
+- Styled using Tailwind CSS v4
 
-## Expanding the ESLint configuration
+## Acknowledgements
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Vite](https://vitejs.dev/)
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- [LucideReact](https://lucide.dev/guide/)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Installation
+
+Install weather forecast with npm
+
+```bash
+git clone git@github.com:AktherHosen/weather-forecast.git
+cd weather-forecast
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install my-project
+cd my-project
 ```
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`VITE_WEATHER_API_KEY=your_openweathermap_api_key`
+
+## Demo
+
+[https://weather-forecast-k4xa.vercel.app/](https://weather-forecast-k4xa.vercel.app/)
+
+## Authors
+
+- [@AktherHosen](https://www.github.com/aktherhosen)
